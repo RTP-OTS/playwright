@@ -92,4 +92,19 @@ export class RegisterPage {
         await this.continueButton.click();
     }
 
+    async fillRegistrationForm(user) {
+        await this.selectGender(); 
+        await this.inputFirstName(user.firstName); 
+        await this.inputLastName(user.lastName);
+        await this.selectBirthDay(user.birthDay); 
+        await this.selectBirthMonth(user.birthMonth);
+        await this.selectBirthYear(user.birthYear);
+        await this.inputEmail(user.email); 
+        await this.inputCompany(user.company);
+        await this.toggleNewsletterSubscription();
+        await this.inputPassword(user.password);
+        await this.inputConfirmPassword(user.confirmPassword);
+        await this.clickRegister();
+    }
+    
 }

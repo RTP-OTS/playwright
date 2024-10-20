@@ -1,0 +1,16 @@
+{
+    "userRegistration": {
+      "firstName": "Jack",
+      "lastName": "Room",
+      "birthDay": "5",
+      "birthMonth": "December",
+      "birthYear": "1991",
+      "email": "Jackroom@test.com",
+      "company": "Test Corp",
+      "password": "abcPassword1234",
+      "confirmPassword": "abcPassword1234",
+      "gender": "male",
+      "newsletterSubscription": true
+    }
+  }
+  

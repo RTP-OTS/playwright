@@ -1,19 +1,33 @@
-import { test , expect } from '../fixtures/page/pageFixtures'
+import { test, expect } from '../fixtures/page/pageFixtures';
+import * as testData from '../testData/testData.json';
+
+let user: any;
 
 test.describe('User Registration Tests', () => {
-  test('should register a new user successfully', async ({ registerPage }) => {
+
+  test.beforeAll(async () => {
+    user = testData.userRegistration;
+  });
+
+  test('[1] should register a new user successfully', async ({ registerPage }) => {
     await registerPage.goToRegisterPage();
     await registerPage.selectGender(); 
-    await registerPage.inputFirstName('Jack'); 
-    await registerPage.inputLastName('Room');
-    await registerPage.selectBirthDay('5'); 
-    await registerPage.selectBirthMonth('December');
-    await registerPage.selectBirthYear('1991');
-    await registerPage.inputEmail('Jackroom@test.com'); 
-    await registerPage.inputCompany('Test Corp');
+    await registerPage.inputFirstName(user.firstName); 
+    await registerPage.inputLastName(user.lastName);
+    await registerPage.selectBirthDay(user.birthDay); 
+    await registerPage.selectBirthMonth(user.birthMonth);
+    await registerPage.selectBirthYear(user.birthYear);
+    await registerPage.inputEmail(user.email); 
+    await registerPage.inputCompany(user.company);
     await registerPage.toggleNewsletterSubscription();
-    await registerPage.inputPassword('abcPassword1234');
-    await registerPage.inputConfirmPassword('abcPassword1234');
+    await registerPage.inputPassword(user.password);
+    await registerPage.inputConfirmPassword(user.confirmPassword);
     await registerPage.clickRegister();
   });
+
+  test('[2] should register a new user successfully', async ({ registerPage }) => {
+    await registerPage.goToRegisterPage();
+    await registerPage.fillRegistrationForm(user)
+  });
+
 });

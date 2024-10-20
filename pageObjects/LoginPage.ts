@@ -15,10 +15,6 @@ export class LoginPage {
         this.firstNameInput = page.locator('#FirstName');
     }
 
-    async setScreenSize() {
-        await this.page.setViewportSize({ width: 1920, height: 1080 });
-    }
-
     async goToLoginPage() {
         await this.page.goto('https://demo.nopcommerce.com/login?returnUrl=%2F');
     }
