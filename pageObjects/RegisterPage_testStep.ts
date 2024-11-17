@@ -29,7 +29,7 @@ export class RegisterPage {
     this.newsletterCheckbox = page.locator("#Newsletter");
     this.passwordInput = page.locator("#Password");
     this.confirmPasswordInput = page.locator("#ConfirmPassword");
-    this.registerButton = page.locator("#register");
+    this.registerButton = page.locator('#register-button');
     this.continueButton = page.getByRole("button", { name: "Continue" });
   }
 
