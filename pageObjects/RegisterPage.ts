@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class RegisterPage {
     private page: Page;
@@ -85,7 +85,11 @@ export class RegisterPage {
     }
 
     async clickRegister() {
-        await this.registerButton.click();
+        await this.registerButton.click({ timeout:500 });
+    }
+
+    async verifyRegisterButton() {
+        await expect(this.registerButton).toBeDisabled();
     }
 
     async clickContinue() {
