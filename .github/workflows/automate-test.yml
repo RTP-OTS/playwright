@@ -1,7 +1,7 @@
 name: Playwright Tests
 
 on:
-  workflow_dispatch:  # ✅ สามารถ Trigger ได้ด้วยมือ
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -28,9 +28,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      #- name: Install Playwright Browsers
-      #run: npx playwright install chromium
-
       - name: Run Playwright tests
         run: npx playwright test tests/todo/todo.spec.ts --project chromium
 
@@ -49,8 +46,8 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         run: |
           if [[ "${{ job.status }}" == "success" ]]; then
-            echo "Playwright Tests Passed!"
+            echo "✅ Playwright Tests Passed!"
           else
-            echo "Playwright Tests Failed!"
-            exit 1
+            echo "❌ Playwright Tests Failed! Blocking PR."
+            exit 1  # ❌ Block PR ถ้า Playwright Tests ล้มเหลว
           fi
