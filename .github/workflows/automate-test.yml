@@ -1,9 +1,10 @@
 name: Playwright Tests
 
 on:
+  workflow_dispatch:
   push:
     branches:
-      - main  # หรือ branch ที่ต้องการให้ trigger
+      - main
       - develop
   pull_request:
     branches:
