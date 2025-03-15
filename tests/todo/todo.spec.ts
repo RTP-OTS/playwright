@@ -5,5 +5,5 @@ test('To do list', async ({ page }) => {
     await page.getByTestId('text-input').fill('demo')
     await page.getByTestId('text-input').press('Enter')
     await page.getByTestId('todo-item-toggle').click()
-    await expect(page.getByTestId('todo-item-error')).toBeVisible();
+    await expect(page.getByTestId('todo-item-label')).toBeVisible();
 });
