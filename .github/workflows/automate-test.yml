@@ -2,14 +2,8 @@ name: Playwright Tests
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - develop
   pull_request:
-    branches:
-      - main
-      - develop
+    branches: [main, develop]
 
 jobs:
   test:
@@ -37,17 +31,3 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
-
-  notify-status:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Notify PR Status
-        if: ${{ github.event_name == 'pull_request' }}
-        run: |
-          if [[ "${{ job.status }}" == "success" ]]; then
-            echo "✅ Playwright Tests Passed!"
-          else
-            echo "❌ Playwright Tests Failed! Blocking PR."
-            exit 1  # ❌ Block PR ถ้า Playwright Tests ล้มเหลว
-          fi
