@@ -1,7 +1,7 @@
 name: Playwright Tests
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # ✅ สามารถ Trigger ได้ด้วยมือ
   push:
     branches:
       - main
@@ -40,7 +40,7 @@ jobs:
           name: playwright-report
           path: playwright-report/
 
- notify-status:
+  notify-status:
     needs: test
     runs-on: ubuntu-latest
     steps:
