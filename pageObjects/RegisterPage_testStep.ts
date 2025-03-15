@@ -29,12 +29,8 @@ export class RegisterPage {
     this.newsletterCheckbox = page.locator("#Newsletter");
     this.passwordInput = page.locator("#Password");
     this.confirmPasswordInput = page.locator("#ConfirmPassword");
-    this.registerButton = page.locator("#register");
+    this.registerButton = page.locator('#register-button');
     this.continueButton = page.getByRole("button", { name: "Continue" });
-  }
-
-  public getPage(): Page {
-    return this.page;
   }
 
   async goToRegisterPage() {
@@ -129,23 +125,6 @@ export class RegisterPage {
   async clickContinue() {
     await test.step("Click on the continue button", async () => {
       await this.continueButton.click();
-    });
-  }
-
-  async fillRegistrationForm(user) {
-    await test.step("Fill the registration form", async () => {
-      await this.selectGender();
-      await this.inputFirstName(user.firstName);
-      await this.inputLastName(user.lastName);
-      await this.selectBirthDay(user.birthDay);
-      await this.selectBirthMonth(user.birthMonth);
-      await this.selectBirthYear(user.birthYear);
-      await this.inputEmail(user.email);
-      await this.inputCompany(user.company);
-      await this.toggleNewsletterSubscription();
-      await this.inputPassword(user.password);
-      await this.inputConfirmPassword(user.confirmPassword);
-      await this.clickRegister();
     });
   }
 }
