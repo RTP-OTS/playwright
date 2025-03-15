@@ -1,6 +1,7 @@
 import { test as base, Page } from '@playwright/test';
 import { LoginPage } from '../../pageObjects/LoginPage';
-import { RegisterPage } from '../../pageObjects/RegisterPage';
+import { RegisterPage } from '../../pageObjects/RegisterPage_testStep';
+// import { RegisterPage } from '../../pageObjects/RegisterPage';
 
 type MyFixtures = {
   loginPage: LoginPage;
@@ -17,6 +18,7 @@ export const test = base.extend<MyFixtures>({
     const registerPage = new RegisterPage(page as Page);
     await use(registerPage);
   },
+  
 });
 
 export { expect } from '@playwright/test';

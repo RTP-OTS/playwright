@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class RegisterPage {
     private page: Page;
@@ -85,11 +85,30 @@ export class RegisterPage {
     }
 
     async clickRegister() {
-        await this.registerButton.click();
+        await this.registerButton.click({ timeout:500 });
+    }
+
+    async verifyRegisterButton() {
+        await expect(this.registerButton).toBeDisabled();
     }
 
     async clickContinue() {
         await this.continueButton.click();
     }
 
+    async fillRegistrationForm(user) {
+        await this.selectGender(); 
+        await this.inputFirstName(user.firstName); 
+        await this.inputLastName(user.lastName);
+        await this.selectBirthDay(user.birthDay); 
+        await this.selectBirthMonth(user.birthMonth);
+        await this.selectBirthYear(user.birthYear);
+        await this.inputEmail(user.email); 
+        await this.inputCompany(user.company);
+        await this.toggleNewsletterSubscription();
+        await this.inputPassword(user.password);
+        await this.inputConfirmPassword(user.confirmPassword);
+        await this.clickRegister();
+    }
+    
 }
