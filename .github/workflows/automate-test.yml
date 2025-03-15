@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'  # หรือเวอร์ชันที่ใช้ในโปรเจกต์
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
@@ -33,7 +33,7 @@ jobs:
         run: npx playwright test tests/todo/todo.spec.ts
 
       - name: Upload Playwright Test Report
-        if: always()  # ให้รันเสมอ แม้ว่าการทดสอบล้มเหลว
+        if: always()  
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
