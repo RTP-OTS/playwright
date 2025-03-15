@@ -14,7 +14,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: mcr.microsoft.com/playwright:v1.40.0 
+    container: mcr.microsoft.com/playwright:v1.48.1-jammy
 
     steps:
       - name: Checkout repository
@@ -32,7 +32,7 @@ jobs:
       #run: npx playwright install chromium
 
       - name: Run Playwright tests
-        run: npx playwright test tests/todo/todo.spec.ts
+        run: npx playwright test tests/todo/todo.spec.ts --project chromium
 
       - name: Upload Playwright Test Report
         if: always()  
