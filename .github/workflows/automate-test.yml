@@ -48,8 +48,8 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         run: |
           if [[ "${{ job.status }}" == "success" ]]; then
-            echo "✅ Playwright Tests Passed"
+            echo "Playwright Tests Passed"
           else
-            echo "❌ Playwright Tests Failed"
+            echo "Playwright Tests Failed"
             exit 1
           fi
