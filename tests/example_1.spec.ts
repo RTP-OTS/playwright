@@ -1,23 +1,5 @@
-// import { test, expect } from '@playwright/test';
-// import { RegisterPage } from '../pageObjects/RegisterPage';
-
-// test.describe('User Registration Tests', () => {
-//   test('should register a new user successfully', async ({ page }) => {
-//     const registerPage = new RegisterPage(page);
-//     await registerPage.goToRegisterPage();
-//     await registerPage.selectGender();
-//     await registerPage.inputFirstName('John');
-//     await registerPage.inputLastName('Doe');
-//     await registerPage.selectBirthDay('1');
-//     await registerPage.selectBirthMonth('January');
-//     await registerPage.selectBirthYear('1990');
-//     await registerPage.inputEmail('johndoe@example.com');
-//     await registerPage.inputCompany('Example Corp');
-//     await registerPage.toggleNewsletterSubscription();
-//     await registerPage.inputPassword('StrongPassword123');
-//     await registerPage.inputConfirmPassword('StrongPassword123');
-//     await registerPage.clickRegister();
-//     await registerPage.verifyRegistrationSuccess();  
-//     await registerPage.clickContinue(); 
-//   });
-// });
+Method	คำอธิบาย
+page.route()	ดักจับ Request ที่ตรงกับ Pattern หรือ URL ที่ระบุ
+route.fulfill()	ตอบกลับคำร้องขอด้วย Response ที่ Mock ขึ้น
+route.abort()	ปฏิเสธคำร้องขอ (เช่น กรณีเซิร์ฟเวอร์ล่ม)
+route.continue()	ส่งคำร้องขอต่อไปยังเซิร์ฟเวอร์จริงหลังจากมีการปรับเปลี่ยน (เช่น Header, Body)
