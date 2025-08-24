@@ -1,23 +1,76 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, Page } from "@playwright/test";
 
-test("Verify that the system handles errors http 500", async ({ page }) => {
+// Constants
+const API_ENDPOINTS = {
+  login: 'http://localhost:5500/auth/login'
+};
 
-  await page.route('http://localhost:5500/auth/login', route => {
+const TEST_DATA = {
+  username: 'admin',
+  password: 'Password123',
+  errorResponse: {
+    code: 'X006',
+    message: 'An unexpected error occurred'
+  }
+};
+
+const SELECTORS = {
+  username: 'username',
+  password: 'password',
+  loginButton: 'Login',
+  errorModal: 'modal',
+  closeModalButton: 'close-modal'
+};
+
+// Helper functions
+async function mockLoginError(page: Page) {
+  await page.route(API_ENDPOINTS.login, route => {
     route.fulfill({
       status: 500,
       contentType: 'application/json',
-      body: JSON.stringify({"code":"X006","message":"An unexpected error occurred."}),
+      body: JSON.stringify(TEST_DATA.errorResponse),
     });
   });
+}
 
-  await page.goto("/login");
-  await page.getByTestId('username').fill('admin');
-  await page.getByTestId('password').fill('Password123');
-  await page.getByRole('button', {name:'Login'}).click();
+async function fillLoginForm(page: Page) {
+  await page.getByTestId(SELECTORS.username).fill(TEST_DATA.username);
+  await page.getByTestId(SELECTORS.password).fill(TEST_DATA.password);
+  await page.getByRole('button', { name: SELECTORS.loginButton }).click();
+}
 
-  const errorModal = await page.getByTestId('modal')
+async function verifyErrorModal(page: Page) {
+  const errorModal = page.getByTestId(SELECTORS.errorModal);
   await expect(errorModal).toBeVisible();
-  await page.getByTestId('close-modal').click();
+  await page.getByTestId(SELECTORS.closeModalButton).click();
   await expect(errorModal).toBeHidden();
+}
 
+test("Verify that the system handles HTTP 500 error", async ({ page }) => {
+  // Setup: Mock API error response
+  await mockLoginError(page);
+  
+  // Action: Navigate and attempt login
+  await page.goto("/login");
+  await fillLoginForm(page);
+  
+  // Assertions: Verify error handling
+  await expect(page).toHaveURL('/login');
+  await verifyErrorModal(page);
+});
+
+test("Login and verify dashboard access on Sauce Demo", async ({ page }) => {
+  // Navigate to Sauce Demo login page
+  await page.goto("https://www.saucedemo.com");
+
+  // Enter valid credentials
+  await page.fill("#user-name", "standard_user");
+  await page.fill("#password", "secret_sauce");
+
+  // Click the login button
+  await page.click("#login-button");
+
+  // Verify successful login by checking for dashboard elements
+  const inventoryContainer = await page.locator(".inventory_container");
+  await expect(inventoryContainer).toBeVisible();
 });
