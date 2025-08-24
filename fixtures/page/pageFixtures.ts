@@ -1,7 +1,7 @@
 import { test as base, Page } from '@playwright/test';
 import { LoginPage } from '../../pageObjects/LoginPage';
-import { RegisterPage } from '../../pageObjects/RegisterPage_testStep';
-// import { RegisterPage } from '../../pageObjects/RegisterPage';
+// import { RegisterPage } from '../../pageObjects/RegisterPage_testStep';
+import { RegisterPage } from '../../pageObjects/RegisterPage';
 
 type MyFixtures = {
   loginPage: LoginPage;
